@@ -1,0 +1,3758 @@
+
+mas transport_system_with_auctions {
+
+    
+    
+	//auctioneer
+	agent auctioneer{
+		join: auction_room
+		focus: auction_room.auction_manager, auction_room.notice_board,
+		auction_room.bids_collector
+		roles: coordinator in mg
+    	beliefs: my_mission(coordinator_mission)
+	}
+	
+
+	//buses
+    agent bus1 : bus.asl {
+    	join: auction_room, bus_calculator
+    	focus: auction_room.notice_board, bus_calculator.bid_calculator,
+    	bus_calculator.path_builder, auction_room.bids_collector,
+    	bus_calculator.shortest_path_searcher
+    	beliefs: point("A"),
+    			 speed(60),
+    			 capacity(4),
+    			 weight_a(61),
+    			 weight_b(20),
+    			 weight_g(19)
+    }
+    
+    agent bus2 : bus.asl {
+    	join: auction_room, bus_calculator
+    	focus:auction_room.notice_board, bus_calculator.bid_calculator,
+    	bus_calculator.path_builder, auction_room.bids_collector,
+    	bus_calculator.shortest_path_searcher
+    	beliefs: point("C"),
+    			 speed(50),
+    			 capacity(4),
+    			 weight_a(60),
+    			 weight_b(25),
+    			 weight_g(15)
+    }
+    
+    agent bus3 : bus.asl {
+    	join: auction_room, bus_calculator
+    	focus:auction_room.notice_board, bus_calculator.bid_calculator,
+    	bus_calculator.path_builder, auction_room.bids_collector,
+    	bus_calculator.shortest_path_searcher
+    	beliefs: point("D"),
+    			 speed(55),
+    			 capacity(4),
+    			 weight_a(58),
+    			 weight_b(35),
+    			 weight_g(7)
+    }
+    
+    agent bus4 : bus.asl {
+    	join: auction_room, bus_calculator
+    	focus:auction_room.notice_board, bus_calculator.bid_calculator,
+    	bus_calculator.path_builder, auction_room.bids_collector,
+    	bus_calculator.shortest_path_searcher
+    	beliefs: point("I"),
+    			 speed(50),
+    			 capacity(4),
+    			 weight_a(57),
+    			 weight_b(35),
+    			 weight_g(8)
+    }
+    
+    agent bus5 : bus.asl {
+    	join: auction_room, bus_calculator
+    	focus:auction_room.notice_board, bus_calculator.bid_calculator,
+    	bus_calculator.path_builder, auction_room.bids_collector,
+    	bus_calculator.shortest_path_searcher
+    	beliefs: point("J"),
+    			 speed(50),
+    			 capacity(4),
+    			 weight_a(58),
+    			 weight_b(34),
+    			 weight_g(8)
+    }
+    
+    agent bus6 : bus.asl {
+    	join: auction_room, bus_calculator
+    	focus:auction_room.notice_board, bus_calculator.bid_calculator,
+    	bus_calculator.path_builder, auction_room.bids_collector,
+    	bus_calculator.shortest_path_searcher
+    	beliefs: point("B"),
+    			 speed(50),
+    			 capacity(4),
+    			 weight_a(57),
+    			 weight_b(35),
+    			 weight_g(8)
+    }
+    
+    //passengers
+    agent passenger1 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("10:00")    			 
+    }
+    
+    agent passenger2 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("10:10")
+    }
+    
+    agent passenger3 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("10:20")
+    }
+    
+    agent passenger4 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("10:30")
+    }
+    
+    agent passenger5 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("10:40")
+    }
+    
+    agent passenger6 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("10:50")
+    }
+    
+    agent passenger7 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("11:00")
+    }
+    
+    agent passenger8 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("11:10")
+    }
+    
+    agent passenger9 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("11:20")    			 
+    }
+    
+    agent passenger10 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("11:30")
+    }
+    
+    agent passenger11 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("11:40")
+    }
+    
+    agent passenger12 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("11:50")
+    }
+    
+    agent passenger13 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("12:00")
+    }
+    
+    agent passenger14 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("12:10")
+    }
+    
+    agent passenger15 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("12:20")
+    }
+    
+    agent passenger16 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("12:30")
+    }
+    
+    agent passenger17 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("12:40")    			 
+    }
+    
+    agent passenger18 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("12:50")
+    }
+    
+    agent passenger19 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("13:00")
+    }
+    
+    agent passenger20 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("13:10")
+    }
+    
+    agent passenger21 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("13:20")
+    }
+    
+    agent passenger22 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("13:30")
+    }
+    
+    agent passenger23 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("13:40")
+    }
+    
+    agent passenger24 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("13:50")
+    }
+    
+    agent passenger25 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("14:00")    			 
+    }
+    
+    agent passenger26 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("14:10")
+    }
+    
+    agent passenger27 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("14:20")
+    }
+    
+    agent passenger28 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("14:30")
+    }
+    
+    agent passenger29 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("14:40")
+    }
+    
+    agent passenger30 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("14:50")
+    }
+    
+    agent passenger31 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("15:00")
+    }
+    
+    agent passenger32 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("15:10")
+    }
+    
+    agent passenger33 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("15:20")    			 
+    }
+    
+    agent passenger34 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("15:30")
+    }
+    
+    agent passenger35 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("15:40")
+    }
+    
+    agent passenger36 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("15:50")
+    }
+    
+    agent passenger37 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("16:00")
+    }
+    
+    agent passenger38 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("16:10")
+    }
+    
+    agent passenger39 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("16:20")
+    }
+    
+    agent passenger40 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("16:30")
+    }
+    
+    agent passenger41 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("16:40")    			 
+    }
+    
+    agent passenger42 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("16:50")
+    }
+    
+    agent passenger43 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("17:00")
+    }
+    
+    agent passenger44 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("17:10")
+    }
+    
+    agent passenger45 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("17:20")
+    }
+    
+    agent passenger46 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("17:30")
+    }
+    
+    agent passenger47 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger48 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger49 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger50 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger51 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("10:00")    			 
+    }
+    
+    agent passenger52 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("10:10")
+    }
+    
+    agent passenger53 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("10:20")
+    }
+    
+    agent passenger54 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("10:30")
+    }
+    
+    agent passenger55 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("10:40")
+    }
+    
+    agent passenger56 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("10:50")
+    }
+    
+    agent passenger57 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("11:00")
+    }
+    
+    agent passenger58 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("11:10")
+    }
+    
+    agent passenger59 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("11:20")    			 
+    }
+    
+    agent passenger60 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("11:30")
+    }
+    
+    agent passenger61 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("11:40")
+    }
+    
+    agent passenger62 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("11:50")
+    }
+    
+    agent passenger63 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("12:00")
+    }
+    
+    agent passenger64 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("12:10")
+    }
+    
+    agent passenger65 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("12:20")
+    }
+    
+    agent passenger66 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("12:30")
+    }
+    
+    agent passenger67 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("12:40")    			 
+    }
+    
+    agent passenger68 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("12:50")
+    }
+    
+    agent passenger69 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("13:00")
+    }
+    
+    agent passenger70 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("13:10")
+    }
+    
+    agent passenger71 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("13:20")
+    }
+    
+    agent passenger72 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("13:30")
+    }
+    
+    agent passenger73 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("13:40")
+    }
+    
+    agent passenger74 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("13:50")
+    }
+    
+    agent passenger75 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("14:00")    			 
+    }
+    
+    agent passenger76 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("14:10")
+    }
+    
+    agent passenger77 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("14:20")
+    }
+    
+    agent passenger78 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("14:30")
+    }
+    
+    agent passenger79 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("14:40")
+    }
+    
+    agent passenger80 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("14:50")
+    }
+    
+    agent passenger81 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("15:00")
+    }
+    
+    agent passenger82 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("15:10")
+    }
+    
+    agent passenger83 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("15:20")    			 
+    }
+    
+    agent passenger84 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("15:30")
+    }
+    
+    agent passenger85 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("15:40")
+    }
+    
+    agent passenger86 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("15:50")
+    }
+    
+    agent passenger87 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("16:00")
+    }
+    
+    agent passenger88 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("16:10")
+    }
+    
+    agent passenger89 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("16:20")
+    }
+    
+    agent passenger90 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("16:30")
+    }
+    
+    agent passenger91 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("16:40")    			 
+    }
+    
+    agent passenger92 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("16:50")
+    }
+    
+    agent passenger93 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("17:00")
+    }
+    
+    agent passenger94 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("17:10")
+    }
+    
+    agent passenger95 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("17:20")
+    }
+    
+    agent passenger96 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("17:30")
+    }
+    
+    agent passenger97 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger98 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger99 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger100 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger101 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger102 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger103 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger104 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+   
+    
+    agent passenger105 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("10:40")
+    }
+    
+    agent passenger106 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("10:50")
+    }
+    
+    agent passenger107 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("11:00")
+    }
+    
+    agent passenger108 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("11:10")
+    }
+    
+    agent passenger109 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("11:20")    			 
+    }
+    
+    agent passenger110 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("11:30")
+    }
+    
+    agent passenger111 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("11:40")
+    }
+    
+    agent passenger112 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("11:50")
+    }
+    
+    agent passenger113 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("12:00")
+    }
+    
+    agent passenger114 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("12:10")
+    }
+    
+    agent passenger115 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("12:20")
+    }
+    
+    agent passenger116 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("12:30")
+    }
+    
+    agent passenger117 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("12:40")    			 
+    }
+    
+    agent passenger118 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("12:50")
+    }
+    
+    agent passenger119 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("13:00")
+    }
+    
+    agent passenger120 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("13:10")
+    }
+    
+    agent passenger121 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("13:20")
+    }
+    
+    agent passenger122 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("13:30")
+    }
+    
+    agent passenger123 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("13:40")
+    }
+    
+    agent passenger124 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("13:50")
+    }
+    
+    agent passenger125 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("14:00")    			 
+    }
+    
+    agent passenger126 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("14:10")
+    }
+    
+    agent passenger127 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("14:20")
+    }
+    
+    agent passenger128 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("14:30")
+    }
+    
+    agent passenger129 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("14:40")
+    }
+    
+    agent passenger130 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("14:50")
+    }
+    
+    agent passenger131 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("15:00")
+    }
+    
+    agent passenger132 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("15:10")
+    }
+    
+    agent passenger133 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("15:20")    			 
+    }
+    
+    agent passenger134 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("15:30")
+    }
+    
+    agent passenger135 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("15:40")
+    }
+    
+    agent passenger136 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("15:50")
+    }
+    
+    agent passenger137 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("16:00")
+    }
+    
+    agent passenger138 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("16:10")
+    }
+    
+    agent passenger139 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("16:20")
+    }
+    
+    agent passenger140 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("16:30")
+    }
+    
+    agent passenger141 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("16:40")    			 
+    }
+    
+    agent passenger142 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("16:50")
+    }
+    
+    agent passenger143 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("17:00")
+    }
+    
+    agent passenger144 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("17:10")
+    }
+    
+    agent passenger145 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("17:20")
+    }
+    
+    agent passenger146 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("17:30")
+    }
+    
+    agent passenger147 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger148 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger149 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger150 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger151 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("10:00")    			 
+    }
+    
+    agent passenger152 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("10:10")
+    }
+    
+    agent passenger153 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("10:20")
+    }
+    
+    agent passenger154 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("10:30")
+    }
+    
+    agent passenger155 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("10:40")
+    }
+    
+    agent passenger156 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("10:50")
+    }
+    
+    agent passenger157 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("11:00")
+    }
+    
+    agent passenger158 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("11:10")
+    }
+    
+    agent passenger159 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("11:20")    			 
+    }
+    
+    agent passenger160 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("11:30")
+    }
+    
+    agent passenger161 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("11:40")
+    }
+    
+    agent passenger162 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("11:50")
+    }
+    
+    agent passenger163 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("12:00")
+    }
+    
+    agent passenger164 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("12:10")
+    }
+    
+    agent passenger165 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("12:20")
+    }
+    
+    agent passenger166 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("12:30")
+    }
+    
+    agent passenger167 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("12:40")    			 
+    }
+    
+    agent passenger168 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("12:50")
+    }
+    
+    agent passenger169 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("13:00")
+    }
+    
+    agent passenger170 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("13:10")
+    }
+    
+    agent passenger171 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("13:20")
+    }
+    
+    agent passenger172 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("13:30")
+    }
+    
+    agent passenger173 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("13:40")
+    }
+    
+    agent passenger174 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("13:50")
+    }
+    
+    agent passenger175 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("14:00")    			 
+    }
+    
+    agent passenger176 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("14:10")
+    }
+    
+    agent passenger177 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("14:20")
+    }
+    
+    agent passenger178 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("14:30")
+    }
+    
+    agent passenger179 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("14:40")
+    }
+    
+    agent passenger180 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("14:50")
+    }
+    
+    agent passenger181 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("15:00")
+    }
+    
+    agent passenger182 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("15:10")
+    }
+    
+    agent passenger183 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("15:20")    			 
+    }
+    
+    agent passenger184 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("15:30")
+    }
+    
+    agent passenger185 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("15:40")
+    }
+    
+    agent passenger186 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("15:50")
+    }
+    
+    agent passenger187 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("16:00")
+    }
+    
+    agent passenger188 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("16:10")
+    }
+    
+    agent passenger189 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("16:20")
+    }
+    
+    agent passenger190 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("16:30")
+    }
+    
+    agent passenger191 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("16:40")    			 
+    }
+    
+    agent passenger192 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("16:50")
+    }
+    
+    agent passenger193 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("17:00")
+    }
+    
+    agent passenger194 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("17:10")
+    }
+    
+    agent passenger195 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("17:20")
+    }
+    
+    agent passenger196 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("17:30")
+    }
+    
+    agent passenger197 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger198 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger199 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger200 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger201 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger202 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger203 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger204 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    
+    
+    agent passenger205 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("10:40")
+    }
+    
+    agent passenger206 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("10:50")
+    }
+    
+    agent passenger207 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("11:00")
+    }
+    
+    agent passenger208 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("11:10")
+    }
+    
+    agent passenger209 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("11:20")    			 
+    }
+    
+    agent passenger210 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("11:30")
+    }
+    
+    agent passenger211 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("11:40")
+    }
+    
+    agent passenger212 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("11:50")
+    }
+    
+    agent passenger213 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("12:00")
+    }
+    
+    agent passenger214 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("12:10")
+    }
+    
+    agent passenger215 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("12:20")
+    }
+    
+    agent passenger216 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("12:30")
+    }
+    
+    agent passenger217 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("12:40")    			 
+    }
+    
+    agent passenger218 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("12:50")
+    }
+    
+    agent passenger219 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("13:00")
+    }
+    
+    agent passenger220 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("13:10")
+    }
+    
+    agent passenger221 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("13:20")
+    }
+    
+    agent passenger222 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("13:30")
+    }
+    
+    agent passenger223 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("13:40")
+    }
+    
+    agent passenger224 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("13:50")
+    }
+    
+    agent passenger225 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("14:00")    			 
+    }
+    
+    agent passenger226 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("14:10")
+    }
+    
+    agent passenger227 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("14:20")
+    }
+    
+    agent passenger228 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("14:30")
+    }
+    
+    agent passenger229 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("14:40")
+    }
+    
+    agent passenger230 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("14:50")
+    }
+    
+    agent passenger231 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("15:00")
+    }
+    
+    agent passenger232 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("15:10")
+    }
+    
+    agent passenger233 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("15:20")    			 
+    }
+    
+    agent passenger234 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("15:30")
+    }
+    
+    agent passenger235 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("15:40")
+    }
+    
+    agent passenger236 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("15:50")
+    }
+    
+    agent passenger237 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("16:00")
+    }
+    
+    agent passenger238 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("16:10")
+    }
+    
+    agent passenger239 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("16:20")
+    }
+    
+    agent passenger240 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("16:30")
+    }
+    
+    agent passenger241 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("16:40")    			 
+    }
+    
+    agent passenger242 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("16:50")
+    }
+    
+    agent passenger243 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("17:00")
+    }
+    
+    agent passenger244 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("17:10")
+    }
+    
+    agent passenger245 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("17:20")
+    }
+    
+    agent passenger246 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("17:30")
+    }
+    
+    agent passenger247 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger248 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger249 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger250 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger251 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("10:00")    			 
+    }
+    
+    agent passenger252 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("10:10")
+    }
+    
+    agent passenger253 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("10:20")
+    }
+    
+    agent passenger254 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("10:30")
+    }
+    
+    agent passenger255 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("10:40")
+    }
+    
+    agent passenger256 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("10:50")
+    }
+    
+    agent passenger257 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("11:00")
+    }
+    
+    agent passenger258 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("11:10")
+    }
+    
+    agent passenger259 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("11:20")    			 
+    }
+    
+    agent passenger260 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("11:30")
+    }
+    
+    agent passenger261 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("11:40")
+    }
+    
+    agent passenger262 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("11:50")
+    }
+    
+    agent passenger263 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("12:00")
+    }
+    
+    agent passenger264 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("12:10")
+    }
+    
+    agent passenger265 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("12:20")
+    }
+    
+    agent passenger266 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("12:30")
+    }
+    
+    agent passenger267 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("12:40")    			 
+    }
+    
+    agent passenger268 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("12:50")
+    }
+    
+    agent passenger269 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("13:00")
+    }
+    
+    agent passenger270 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("13:10")
+    }
+    
+    agent passenger271 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("13:20")
+    }
+    
+    agent passenger272 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("13:30")
+    }
+    
+    agent passenger273 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("13:40")
+    }
+    
+    agent passenger274 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("13:50")
+    }
+    
+    agent passenger275 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("14:00")    			 
+    }
+    
+    agent passenger276 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("14:10")
+    }
+    
+    agent passenger277 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("14:20")
+    }
+    
+    agent passenger278 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("14:30")
+    }
+    
+    agent passenger279 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("14:40")
+    }
+    
+    agent passenger280 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("14:50")
+    }
+    
+    agent passenger281 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("15:00")
+    }
+    
+    agent passenger282 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("15:10")
+    }
+    
+    agent passenger283 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("15:20")    			 
+    }
+    
+    agent passenger284 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("15:30")
+    }
+    
+    agent passenger285 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("15:40")
+    }
+    
+    agent passenger286 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("15:50")
+    }
+    
+    agent passenger287 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("16:00")
+    }
+    
+    agent passenger288 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("16:10")
+    }
+    
+    agent passenger289 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("16:20")
+    }
+    
+    agent passenger290 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("16:30")
+    }
+    
+    agent passenger291 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("16:40")    			 
+    }
+    
+    agent passenger292 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("16:50")
+    }
+    
+    agent passenger293 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("17:00")
+    }
+    
+    agent passenger294 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("17:10")
+    }
+    
+    agent passenger295 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("17:20")
+    }
+    
+    agent passenger296 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("17:30")
+    }
+    
+    agent passenger297 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger298 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger299 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger300 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger301 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger302 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger303 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger304 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+   
+    
+    agent passenger305 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("10:40")
+    }
+    
+    agent passenger306 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("10:50")
+    }
+    
+    agent passenger307 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("11:00")
+    }
+    
+    agent passenger308 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("11:10")
+    }
+    
+    agent passenger309 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("11:20")    			 
+    }
+    
+    agent passenger310 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("11:30")
+    }
+    
+    agent passenger311 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("11:40")
+    }
+    
+    agent passenger312 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("11:50")
+    }
+    
+    agent passenger313 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("12:00")
+    }
+    
+    agent passenger314 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("12:10")
+    }
+    
+    agent passenger315 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("12:20")
+    }
+    
+    agent passenger316 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("12:30")
+    }
+    
+    agent passenger317 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("12:40")    			 
+    }
+    
+    agent passenger318 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("12:50")
+    }
+    
+    agent passenger319 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("13:00")
+    }
+    
+    agent passenger320 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("13:10")
+    }
+    
+    agent passenger321 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("13:20")
+    }
+    
+    agent passenger322 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("13:30")
+    }
+    
+    agent passenger3123 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("13:40")
+    }
+    
+    agent passenger3124 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("13:50")
+    }
+    
+    agent passenger3125 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("14:00")    			 
+    }
+    
+    agent passenger3126 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("14:10")
+    }
+    
+    agent passenger3127 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("14:20")
+    }
+    
+    agent passenger3128 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("14:30")
+    }
+    
+    agent passenger3129 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("14:40")
+    }
+    
+    agent passenger3130 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("14:50")
+    }
+    
+    agent passenger3131 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("15:00")
+    }
+    
+    agent passenger3132 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("15:10")
+    }
+    
+    agent passenger3133 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("15:20")    			 
+    }
+    
+    agent passenger3134 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("15:30")
+    }
+    
+    agent passenger3135 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("15:40")
+    }
+    
+    agent passenger3136 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("15:50")
+    }
+    
+    agent passenger3137 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("16:00")
+    }
+    
+    agent passenger3138 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("16:10")
+    }
+    
+    agent passenger3139 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("16:20")
+    }
+    
+    agent passenger3140 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("16:30")
+    }
+    
+    agent passenger3141 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("16:40")    			 
+    }
+    
+    agent passenger3142 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("16:50")
+    }
+    
+    agent passenger3143 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("17:00")
+    }
+    
+    agent passenger3144 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("17:10")
+    }
+    
+    agent passenger3145 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("17:20")
+    }
+    
+    agent passenger3146 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("17:30")
+    }
+    
+    agent passenger3147 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger3148 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger3149 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger3150 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger3151 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("10:00")    			 
+    }
+    
+    agent passenger3152 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("10:10")
+    }
+    
+    agent passenger3153 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("10:20")
+    }
+    
+    agent passenger3154 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("10:30")
+    }
+    
+    agent passenger3155 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("10:40")
+    }
+    
+    agent passenger3156 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("10:50")
+    }
+    
+    agent passenger3157 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("11:00")
+    }
+    
+    agent passenger3158 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("11:10")
+    }
+    
+    agent passenger3159 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("11:20")    			 
+    }
+    
+    agent passenger3160 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("11:30")
+    }
+    
+    agent passenger3161 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("11:40")
+    }
+    
+    agent passenger3162 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("11:50")
+    }
+    
+    agent passenger3163 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("12:00")
+    }
+    
+    agent passenger3164 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("12:10")
+    }
+    
+    agent passenger3165 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("12:20")
+    }
+    
+    agent passenger3166 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("12:30")
+    }
+    
+    agent passenger3167 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("12:40")    			 
+    }
+    
+    agent passenger3168 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("12:50")
+    }
+    
+    agent passenger3169 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("13:00")
+    }
+    
+    agent passenger3170 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("13:10")
+    }
+    
+    agent passenger3171 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("13:20")
+    }
+    
+    agent passenger3172 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("13:30")
+    }
+    
+    agent passenger3173 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("13:40")
+    }
+    
+    agent passenger3174 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("13:50")
+    }
+    
+    agent passenger3175 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("14:00")    			 
+    }
+    
+    agent passenger3176 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("14:10")
+    }
+    
+    agent passenger3177 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("14:20")
+    }
+    
+    agent passenger3178 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("14:30")
+    }
+    
+    agent passenger3179 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("14:40")
+    }
+    
+    agent passenger3180 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("14:50")
+    }
+    
+    agent passenger3181 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("15:00")
+    }
+    
+    agent passenger3182 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("15:10")
+    }
+    
+    agent passenger3183 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(170), 
+    			 start_point("B"),
+				 end_point("E"),
+    			 start_time("15:20")    			 
+    }
+    
+    agent passenger3184 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(150), 
+    			 start_point("A"),
+				 end_point("B"),
+    			 start_time("15:30")
+    }
+    
+    agent passenger3185 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(200), 
+    			 start_point("A"),
+				 end_point("E"),
+    			 start_time("15:40")
+    }
+    
+    agent passenger3186 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("D"),
+				 end_point("C"),
+    			 start_time("15:50")
+    }
+    
+    agent passenger3187 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("D"),
+    			 start_time("16:00")
+    }
+    
+    agent passenger3188 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("16:10")
+    }
+    
+    agent passenger3189 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("D"),
+				 end_point("G"),
+    			 start_time("16:20")
+    }
+    
+    agent passenger3190 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("16:30")
+    }
+    
+    agent passenger3191 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("F"),
+    			 start_time("16:40")    			 
+    }
+    
+    agent passenger3192 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(250), 
+    			 start_point("A"),
+				 end_point("J"),
+    			 start_time("16:50")
+    }
+    
+    agent passenger3193 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(180), 
+    			 start_point("C"),
+				 end_point("H"),
+    			 start_time("17:00")
+    }
+    
+    agent passenger3194 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(100), 
+    			 start_point("D"),
+				 end_point("F"),
+    			 start_time("17:10")
+    }
+    
+    agent passenger3195 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(220), 
+    			 start_point("E"),
+				 end_point("G"),
+    			 start_time("17:20")
+    }
+    
+    agent passenger3196 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(270), 
+    			 start_point("I"),
+				 end_point("J"),
+    			 start_time("17:30")
+    }
+    
+    agent passenger3197 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger3198 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger3199 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger400 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger401 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger402 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    agent passenger403 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(190), 
+    			 start_point("C"),
+				 end_point("G"),
+    			 start_time("17:40")
+    }
+    
+    agent passenger404 : passenger.asl {
+    	join: auction_room
+    	focus: auction_room.notice_board
+    	beliefs: price(210), 
+    			 start_point("G"),
+				 end_point("E"),
+    			 start_time("17:50")
+    }
+    
+    workspace auction_room { 
+    	artifact auction_manager: tools_of_auctioneer.AuctionManager
+    	artifact notice_board: tools_of_auctioneer.NoticeBoard
+    	artifact bids_collector: tools_of_auctioneer.BidsCollector
+	}
+	
+	workspace bus_calculator { 
+    	artifact bid_calculator: tools_of_bus.BidCalculator
+    	artifact path_builder: tools_of_bus.PathBuilder
+    	artifact shortest_path_searcher: tools_of_bus.ShortestPathSearcher
+	}
+
+	organisation transport_company : org.xml {
+    	group mg : manager_group {
+    		responsible-for: ms
+    	}
+    	scheme ms : manager_scheme
+    }
+
+}
+
